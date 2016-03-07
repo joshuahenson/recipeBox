@@ -30,14 +30,19 @@ class ModalContainer extends Component {
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.save}>
-              <Input type="text" label="Recipe Name" ref='recipeName' placeholder="What are we making?" />
-              <Input type="textarea" label="Ingredients" ref='ingredients' placeholder="list, separated, by, comma" />
-              <Input type="textarea" label="Directions" ref='directions' placeholder="What are we going to do with these ingredients?" />
+              <Input type="text" label="Recipe Name" ref='recipeName'
+                placeholder="What are we making?" />
+              <Input type="textarea" label="Ingredients" ref='ingredients'
+                placeholder="list, separated, by, comma" />
+              <Input type="textarea" label="Directions" ref='directions'
+                placeholder="What are we going to do with these ingredients?" />
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Cancel</Button>
-            <Button bsStyle='primary' type='submit' onClick={this.save}>Save Recipe</Button>
+            <Button bsStyle='primary' type='submit' onClick={this.save}>
+              Save Recipe
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
