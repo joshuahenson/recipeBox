@@ -5,13 +5,20 @@ import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
 class ModalContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.close = this.close.bind(this);
+  }
+  close() {
+    this.props.triggerModal();
+  }
   render() {
     return (
       <div className='row'>
-      <Button bsSize='large' bsStyle='primary' onClick={() => this.props.triggerModal()}>
+      <Button bsSize='large' bsStyle='primary' onClick={this.close}>
         Add Recipe
       </Button>
-        <Modal show={this.props.showModal} onHide={() => this.props.triggerModal()}>
+        <Modal show={this.props.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Recipe</Modal.Title>
           </Modal.Header>
@@ -23,7 +30,7 @@ class ModalContainer extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.triggerModal()}>Cancel</Button>
+            <Button onClick={this.close}>Cancel</Button>
             <Button bsStyle='primary'>Save Recipe</Button>
           </Modal.Footer>
         </Modal>
