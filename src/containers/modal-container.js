@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerModal } from '../actions/index';
+import { triggerModal, addRecipe } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
