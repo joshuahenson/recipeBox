@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Accordion, Panel } from 'react-bootstrap';
 //import { selectBook } from '../actions/index';
 // import { bindActionCreators } from 'redux';
 
@@ -7,20 +8,21 @@ class RecipeList extends Component {
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <li
-          key={recipe.recipeName}
-          onClick=''
-          className="list-group-item">
-          {recipe.recipeName}
-        </li>
+        <Accordion key={recipe.recipeName}>
+          <Panel header={recipe.recipeName} eventKey={recipe.recipeName}>
+            Ingredients: {recipe.ingredients}
+            <br />
+            Directions: {recipe.directions}
+          </Panel>
+        </Accordion>
       );
     });
   }
   render() {
     return (
-      <ul className='list-group col-sm-4'>
+      <div>
         {this.renderList()}
-      </ul>
+      </div>
     )
   }
 }
