@@ -8,21 +8,19 @@ class RecipeList extends Component {
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <Accordion key={recipe.recipeName}>
-          <Panel header={recipe.recipeName} eventKey={recipe.recipeName}>
-            Ingredients: {recipe.ingredients}
-            <br />
-            Directions: {recipe.directions}
-          </Panel>
-        </Accordion>
+        <Panel header={recipe.recipeName} key={recipe.recipeName} eventKey={recipe.recipeName}>
+          Ingredients: {recipe.ingredients}
+          <br />
+          Directions: {recipe.directions}
+        </Panel>
       );
     });
   }
   render() {
     return (
-      <div>
+      <Accordion>
         {this.renderList()}
-      </div>
+      </Accordion>
     )
   }
 }
