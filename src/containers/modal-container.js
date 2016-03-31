@@ -7,25 +7,25 @@ import { Modal, Button, Input } from 'react-bootstrap';
 class ModalContainer extends Component {
   constructor(props) {
     super(props);
-    this.close = this.close.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.save = this.save.bind(this);
   }
-  close() {
+  toggle() {
     this.props.triggerModal();
   }
   save(e) {
     e.preventDefault();
     const recipeInputs = {recipeName: this.refs.recipeName.getValue(), ingredients: this.refs.ingredients.getValue(), directions: this.refs.directions.getValue()};
     this.props.addRecipe(recipeInputs);
-    this.close();
+    this.toggle();
   }
   render() {
     return (
       <div className='row'>
-        <Button bsSize='large' bsStyle='primary' onClick={this.close}>
+        <Button bsSize='large' bsStyle='primary' onClick={this.toggle}>
           Add Recipe
         </Button>
-        <Modal show={this.props.showModal} onHide={this.close}>
+        <Modal show={this.props.showModal} onHide={this.toggle}>
           <Modal.Header closeButton>
             <Modal.Title>Recipe</Modal.Title>
           </Modal.Header>
@@ -40,7 +40,7 @@ class ModalContainer extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>Cancel</Button>
+            <Button onClick={this.toggle}>Cancel</Button>
             <Button bsStyle='primary' type='submit' onClick={this.save}>
               Save Recipe
             </Button>

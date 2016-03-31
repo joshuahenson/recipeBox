@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Panel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 //import { selectBook } from '../actions/index';
 // import { bindActionCreators } from 'redux';
 
@@ -9,9 +10,25 @@ class RecipeList extends Component {
     return this.props.recipes.map((recipe) => {
       return (
         <Panel header={recipe.recipeName} key={recipe.recipeName} eventKey={recipe.recipeName}>
-          Ingredients: {recipe.ingredients}
-          <br />
-          Directions: {recipe.directions}
+          <div className="row">
+            <div className="col-xs-12">
+              <h4 className="text-center">
+                Ingredients
+              </h4>
+              <p>{recipe.ingredients}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12">
+              <h4 className="text-center">
+                Directions
+              </h4>
+              <p>{recipe.directions}</p>
+            </div>
+          </div>
+          <Button bsSize='small'>
+            Edit
+          </Button>
         </Panel>
       );
     });
