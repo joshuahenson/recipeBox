@@ -22,9 +22,6 @@ class ModalContainer extends Component {
   render() {
     return (
       <div className='row'>
-        <Button bsSize='large' bsStyle='primary' onClick={this.toggle}>
-          Add Recipe
-        </Button>
         <Modal show={this.props.showModal} onHide={this.toggle}>
           <Modal.Header closeButton>
             <Modal.Title>Recipe</Modal.Title>
