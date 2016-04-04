@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Panel, Button } from 'react-bootstrap';
-import { triggerModal } from '../actions/index';
+import { triggerModal, editRecipe } from '../actions/index';
 import ModalContainer from './modal-container';
 import { bindActionCreators } from 'redux';
 
@@ -16,7 +16,7 @@ class RecipeList extends Component {
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <Panel header={recipe.recipeName} key={recipe.recipeName} eventKey={recipe.recipeName}>
+        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id}>
           <div className="row">
             <div className="col-xs-12">
               <h4 className="text-center">
@@ -59,7 +59,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerModal: triggerModal }, dispatch);
+  return bindActionCreators({ triggerModal: triggerModal, editRecipe: editRecipe }, dispatch);
 }
 
 
