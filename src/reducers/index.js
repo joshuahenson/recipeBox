@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import ShowModal from './reducer_show_modal';
-import AddRecipe from './reducer_add_recipe';
+import showModal from './reducer_show_modal';
+import recipes from './reducer_recipes';
 
 const rootReducer = combineReducers({
-  showModal: ShowModal,
-  recipes: AddRecipe
+  showModal,
+  recipes
 });
 
 export default rootReducer;
