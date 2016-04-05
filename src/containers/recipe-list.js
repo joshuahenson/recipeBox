@@ -34,12 +34,9 @@ class RecipeList extends Component {
   }
   render() {
     return (
-      <div>
       <Accordion>
         {this.renderList()}
       </Accordion>
-
-      </div>
     )
   }
 }
