@@ -6,17 +6,10 @@ import { Button } from 'react-bootstrap';
 import ModalContainer from './modal-container';
 
 class ModalLauncher extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-  }
-  toggle() {
-    this.props.triggerModal();
-  }
   render() {
     return (
       <div className='row'>
-        <Button bsSize='large' bsStyle='primary' onClick={this.toggle}>
+        <Button bsSize='large' bsStyle='primary' onClick={ () => this.props.triggerModal() }>
           Add Recipe
         </Button>
         <ModalContainer />
@@ -26,9 +19,6 @@ class ModalLauncher extends Component {
 }
 
 function mapStateToProps(state) {
-  //Whatever is returned will show up as props
-  //inside ModalLauncher
-  //console.log('state = ', state);
   return {
     showModal: state.showModal
   };
@@ -39,7 +29,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever ModalLauncher is called, the result should be passed
   // to all our reducers
-  return bindActionCreators({ triggerModal: triggerModal }, dispatch);
+  return bindActionCreators({ triggerModal }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalLauncher);

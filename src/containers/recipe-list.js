@@ -6,13 +6,6 @@ import ModalContainer from './modal-container';
 import { bindActionCreators } from 'redux';
 
 class RecipeList extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-  }
-  toggle() {
-    this.props.triggerModal();
-  }
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
@@ -33,7 +26,7 @@ class RecipeList extends Component {
               <p>{recipe.directions}</p>
             </div>
           </div>
-          <Button bsSize='small' onClick={this.toggle}>
+          <Button bsSize='small' onClick={ () => this.props.triggerModal() }>
             Edit
           </Button>
           <ModalContainer />
