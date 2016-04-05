@@ -22,7 +22,8 @@ const recipe = (state, action) => {
   }
 }
 
-const recipes = (state = [], action) => {
+const exampleState = {id: 'x', recipeName: 'Pizza', ingredients: 'Phone number of pizza place', directions: 'Call pizza place'}
+const recipes = (state = [exampleState], action) => {
   switch (action.type) {
     case 'ADD_RECIPE':
       return [
