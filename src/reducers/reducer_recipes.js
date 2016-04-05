@@ -5,7 +5,7 @@ const recipe = (state, action) => {
         id: action.id,
         recipeName: action.payload.recipeName,
         ingredients: action.payload.ingredients,
-        directions: action.payload.ingredients
+        directions: action.payload.directions
       }
     case 'UPDATE_RECIPE':
       if (state.id !== action.payload.id) {
@@ -15,7 +15,7 @@ const recipe = (state, action) => {
       return Object.assign({}, state, {
         recipeName: action.payload.recipeName,
         ingredients: action.payload.ingredients,
-        directions: action.payload.ingredients
+        directions: action.payload.directions
       })
     default:
       return state
