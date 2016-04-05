@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Panel, Button } from 'react-bootstrap';
-import { triggerModal, activeRecipe } from '../actions/index';
-import ModalContainer from './modal-container';
+import { triggerUpdateModal, activeRecipe } from '../actions/index';
+import ModalUpdateContainer from './modal-update-container';
 import { bindActionCreators } from 'redux';
 
 class RecipeList extends Component {
@@ -26,19 +26,21 @@ class RecipeList extends Component {
               <p>{recipe.directions}</p>
             </div>
           </div>
-          <Button bsSize='small' onClick={ () => this.props.triggerModal() }>
+          <Button bsSize='small' onClick={ () => this.props.triggerUpdateModal() }>
             Edit
           </Button>
-          <ModalContainer />
         </Panel>
       );
     });
   }
   render() {
     return (
+      <div>
       <Accordion>
         {this.renderList()}
       </Accordion>
+      <ModalUpdateContainer />
+      </div>
     )
   }
 }
@@ -50,7 +52,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerModal, activeRecipe }, dispatch);
+  return bindActionCreators({ triggerUpdateModal, activeRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
