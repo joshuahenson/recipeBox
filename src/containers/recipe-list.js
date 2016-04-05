@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Panel, Button } from 'react-bootstrap';
-import { triggerModal, editRecipe } from '../actions/index';
+import { triggerModal, activeRecipe } from '../actions/index';
 import ModalContainer from './modal-container';
 import { bindActionCreators } from 'redux';
 
@@ -9,14 +9,18 @@ class RecipeList extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.activate = this.activate.bind(this);
   }
   toggle() {
     this.props.triggerModal();
   }
+  activate(recipe) {
+    this.props.activeRecipe(recipe);
+  }
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id}>
+        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id} onClick={ this.activate(recipe) }>
           <div className="row">
             <div className="col-xs-12">
               <h4 className="text-center">
@@ -51,17 +55,13 @@ class RecipeList extends Component {
 }
 
 function mapStateToProps(state) {
-  //Whatever is returned will show up as props
-  //inside BookList
   return {
     recipes: state.recipes
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerModal: triggerModal, editRecipe: editRecipe }, dispatch);
+  return bindActionCreators({ triggerModal, activeRecipe }, dispatch);
 }
 
-
-// export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);

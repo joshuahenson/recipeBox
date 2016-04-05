@@ -5,6 +5,13 @@ export const triggerModal = () => {
     }
 }
 
+export const activeRecipe = (recipe) => {
+  return {
+    type: 'ACTIVE_RECIPE',
+    payload: recipe
+  }
+}
+
 export const addRecipe = (recipeInputs) => {
   return {
     type: 'ADD_RECIPE',
