@@ -8,7 +8,7 @@ const recipe = (state, action) => {
         directions: action.payload.ingredients
       }
     case 'UPDATE_RECIPE':
-      if (state.id !== action.id) {
+      if (state.id !== action.payload.id) {
         return state
       }
 
