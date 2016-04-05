@@ -9,18 +9,14 @@ class RecipeList extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.activate = this.activate.bind(this);
   }
   toggle() {
     this.props.triggerModal();
   }
-  activate(recipe) {
-    this.props.activeRecipe(recipe);
-  }
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id} onClick={ this.activate(recipe) }>
+        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id} onClick={ () => this.props.activeRecipe(recipe) }>
           <div className="row">
             <div className="col-xs-12">
               <h4 className="text-center">
