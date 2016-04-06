@@ -33,7 +33,7 @@ const recipes = (state = [exampleState], action) => {
       ]
 
     case 'DELETE_RECIPE':
-      return state.filter(recipe => recipe.id !== action.payload.id)
+      return state.filter(recipe => recipe.id !== action.id)
 
     case 'UPDATE_RECIPE':
       return state.map(t =>

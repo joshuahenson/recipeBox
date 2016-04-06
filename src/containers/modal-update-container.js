@@ -25,16 +25,18 @@ class ModalUpdateContainer extends Component {
     this.props.updateRecipe(recipeInputs);
     this.toggle();
   }
+  // delete() {
+  //   let recipeInputs = {
+  //     recipeName: this.refs.recipeName.getValue(),
+  //     ingredients: this.refs.ingredients.getValue(),
+  //     directions: this.refs.directions.getValue(),
+  //     id: this.props.activeRecipe.id
+  //   };
+  //   this.toggle();
+  //   this.props.deleteRecipe(recipeInputs);
   delete() {
-    let recipeInputs = {
-      recipeName: this.refs.recipeName.getValue(),
-      ingredients: this.refs.ingredients.getValue(),
-      directions: this.refs.directions.getValue(),
-      id: this.props.activeRecipe.id
-    };
+    this.props.deleteRecipe(this.props.activeRecipe.id);
     this.toggle();
-    this.props.deleteRecipe(recipeInputs);
-
   }
   render() {
     return (

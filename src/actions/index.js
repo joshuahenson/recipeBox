@@ -11,10 +11,10 @@ export const triggerUpdateModal = () => {
     }
 }
 
-export const deleteRecipe = (recipeInputs) => {
+export const deleteRecipe = (id) => {
   return {
     type: 'DELETE_RECIPE',
-    payload: recipeInputs
+    id
     }
 }
 

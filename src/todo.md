@@ -2,5 +2,8 @@ ingredients as array
 
 separate measurement field somehow?
 ***
-delete button
+confirmation before delete
 ***
+local storage
+***
+make it pretty
