@@ -11,6 +11,12 @@ export const triggerUpdateModal = () => {
     }
 }
 
+export const triggerAlert= () => {
+  return {
+    type: 'SHOW_ALERT'
+    }
+}
+
 export const deleteRecipe = (id) => {
   return {
     type: 'DELETE_RECIPE',

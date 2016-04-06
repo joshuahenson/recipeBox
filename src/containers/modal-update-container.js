@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerUpdateModal, updateRecipe, deleteRecipe } from '../actions/index';
+import { triggerUpdateModal, updateRecipe } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
@@ -9,7 +9,6 @@ class ModalUpdateContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.update = this.update.bind(this);
-    this.delete = this.delete.bind(this);
   }
   toggle() {
     this.props.triggerUpdateModal();
@@ -22,10 +21,6 @@ class ModalUpdateContainer extends Component {
       id: this.props.activeRecipe.id
     };
     this.props.updateRecipe(recipeInputs);
-    this.toggle();
-  }
-  delete() {
-    this.props.deleteRecipe(this.props.activeRecipe.id);
     this.toggle();
   }
   render() {
@@ -49,7 +44,6 @@ class ModalUpdateContainer extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button bsStyle='danger' className='pull-left' onClick={this.delete}>Delete</Button>
             <Button onClick={this.toggle}>Cancel</Button>
             <Button bsStyle='primary' type='submit' onClick={this.update}>
               Update Recipe
@@ -70,7 +64,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerUpdateModal, updateRecipe, deleteRecipe }, dispatch);
+  return bindActionCreators({ triggerUpdateModal, updateRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalUpdateContainer);

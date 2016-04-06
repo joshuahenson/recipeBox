@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Accordion, Panel, Button } from 'react-bootstrap';
+import { Accordion, Panel } from 'react-bootstrap';
 import { triggerUpdateModal, activeRecipe } from '../actions/index';
+import EditDeleteContainer from './edit-delete';
 import { bindActionCreators } from 'redux';
 
 class RecipeList extends Component {
@@ -29,9 +30,7 @@ class RecipeList extends Component {
               <p>{recipe.directions}</p>
             </div>
           </div>
-          <Button bsSize='small' onClick={ () => this.props.triggerUpdateModal() }>
-            Edit
-          </Button>
+          <EditDeleteContainer />
         </Panel>
       );
     });
