@@ -30,6 +30,7 @@ class RecipeList extends Component {
               <p>{recipe.directions}</p>
             </div>
           </div>
+          <hr />
           <EditDeleteContainer />
         </Panel>
       );

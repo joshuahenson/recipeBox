@@ -1,6 +1,5 @@
 
-***
-confirmation before delete
+
 ***
 local storage
 ***
