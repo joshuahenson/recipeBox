@@ -16,7 +16,7 @@ class ModalUpdateContainer extends Component {
   }
   update(e) {
     e.preventDefault();
-    const recipeInputs = {
+    let recipeInputs = {
       recipeName: this.refs.recipeName.getValue(),
       ingredients: this.refs.ingredients.getValue(),
       directions: this.refs.directions.getValue(),
@@ -26,7 +26,7 @@ class ModalUpdateContainer extends Component {
     this.toggle();
   }
   delete() {
-    const recipeInputs = {
+    let recipeInputs = {
       recipeName: this.refs.recipeName.getValue(),
       ingredients: this.refs.ingredients.getValue(),
       directions: this.refs.directions.getValue(),

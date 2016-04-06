@@ -15,7 +15,7 @@ class ModalContainer extends Component {
   }
   save(e) {
     e.preventDefault();
-    const recipeInputs = {recipeName: this.refs.recipeName.getValue(), ingredients: this.refs.ingredients.getValue(), directions: this.refs.directions.getValue()};
+    let recipeInputs = {recipeName: this.refs.recipeName.getValue(), ingredients: this.refs.ingredients.getValue(), directions: this.refs.directions.getValue()};
     this.props.addRecipe(recipeInputs);
     this.toggle();
   }
