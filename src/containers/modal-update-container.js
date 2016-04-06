@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerUpdateModal, updateRecipe } from '../actions/index';
+import { triggerUpdateModal, updateRecipe, deleteRecipe } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
@@ -9,6 +9,7 @@ class ModalUpdateContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
   }
   toggle() {
     this.props.triggerUpdateModal();
@@ -23,6 +24,17 @@ class ModalUpdateContainer extends Component {
     };
     this.props.updateRecipe(recipeInputs);
     this.toggle();
+  }
+  delete() {
+    const recipeInputs = {
+      recipeName: this.refs.recipeName.getValue(),
+      ingredients: this.refs.ingredients.getValue(),
+      directions: this.refs.directions.getValue(),
+      id: this.props.activeRecipe.id
+    };
+    this.toggle();
+    this.props.deleteRecipe(recipeInputs);
+
   }
   render() {
     return (
@@ -45,6 +57,7 @@ class ModalUpdateContainer extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
+            <Button bsStyle='danger' className='pull-left' onClick={this.delete}>Delete</Button>
             <Button onClick={this.toggle}>Cancel</Button>
             <Button bsStyle='primary' type='submit' onClick={this.update}>
               Update Recipe
@@ -65,7 +78,7 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerUpdateModal, updateRecipe }, dispatch);
+  return bindActionCreators({ triggerUpdateModal, updateRecipe, deleteRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalUpdateContainer);
