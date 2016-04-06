@@ -18,7 +18,7 @@ class ModalUpdateContainer extends Component {
     e.preventDefault();
     let recipeInputs = {
       recipeName: this.refs.recipeName.getValue(),
-      ingredients: this.refs.ingredients.getValue(),
+      ingredients: this.refs.ingredients.getValue().split(','),
       directions: this.refs.directions.getValue(),
       id: this.props.activeRecipe.id
     };

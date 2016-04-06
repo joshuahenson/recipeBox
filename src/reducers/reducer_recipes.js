@@ -22,7 +22,7 @@ const recipe = (state, action) => {
   }
 }
 
-const exampleState = {id: 'x', recipeName: 'Pizza', ingredients: 'Phone number of pizza place', directions: 'Call pizza place'}
+const exampleState = {id: 'x', recipeName: 'Pizza', ingredients: ['Phone', 'Phone number of pizza place'], directions: 'Call pizza place'}
 
 const recipes = (state = [exampleState], action) => {
   switch (action.type) {

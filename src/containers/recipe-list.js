@@ -14,7 +14,11 @@ class RecipeList extends Component {
               <h4 className="text-center">
                 Ingredients
               </h4>
-              <p>{recipe.ingredients}</p>
+              <ul>
+                {recipe.ingredients.map(ingredient => {
+                  return(<li key={ingredient}>{ingredient}</li>)
+                })}
+              </ul>
             </div>
           </div>
           <div className="row">
