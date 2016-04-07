@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-
+import {compose, createStore} from 'redux';
+import persistState from 'redux-localstorage'
 import App from './components/app';
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createPersistentStore = compose(
+  persistState()
+)(createStore)
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createPersistentStore(reducers)}>
     <App />
   </Provider>
   , document.querySelector('.container'));
