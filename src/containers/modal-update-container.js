@@ -13,7 +13,8 @@ class ModalUpdateContainer extends Component {
   toggle() {
     this.props.triggerUpdateModal();
   }
-  update() {
+  update(e) {
+    e.preventDefault();
     let recipeInputs = {
       recipeName: this.refs.recipeName.getValue(),
       ingredients: this.refs.ingredients.getValue().split(','),
