@@ -1,4 +1,10 @@
-fix id bug resulting from local storage
+
+***
+input validation?
+
+at least make sure not empty????
+***
+dismiss alert if changing panel?
 ***
 clean up code
 ***

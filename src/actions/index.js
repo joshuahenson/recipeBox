@@ -1,4 +1,6 @@
-let nextRecipeId = 0;
+// recipe id is stored to localStorage to keep up with state that is stored
+let nextRecipeId = localStorage.getItem('nextRecipeId') || 0;
+
 export const triggerModal = () => {
   return {
     type: 'SHOW_MODAL'
@@ -32,10 +34,12 @@ export const activeRecipe = (recipe) => {
 }
 
 export const addRecipe = (recipeInputs) => {
+  nextRecipeId++;
+  localStorage.setItem('nextRecipeId', nextRecipeId);
   return {
     type: 'ADD_RECIPE',
     payload: recipeInputs,
-    id: nextRecipeId++
+    id: nextRecipeId
     }
 }
 
