@@ -28,7 +28,7 @@ class ModalUpdateContainer extends Component {
       <div className='row'>
         <Modal show={this.props.showUpdateModal} onHide={this.toggle}>
           <Modal.Header closeButton>
-            <Modal.Title>Recipe</Modal.Title>
+            <Modal.Title>{ this.props.activeRecipe.recipeName }</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.update}>
