@@ -9,7 +9,12 @@ class RecipeList extends Component {
   renderList() {
     return this.props.recipes.map((recipe) => {
       return (
-        <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id} onClick={ () => this.props.activeRecipe(recipe) }>
+        <Panel
+          header={recipe.recipeName}
+          key={recipe.id}
+          eventKey={recipe.id}
+          onClick={ () => this.props.activeRecipe(recipe) }
+        >
           <div className="row">
             <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
               <h4 className="text-center">
@@ -46,6 +51,7 @@ class RecipeList extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state= ', state);
   return {
     recipes: state.recipes
   };

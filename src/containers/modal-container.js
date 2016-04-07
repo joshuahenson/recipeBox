@@ -15,7 +15,11 @@ class ModalContainer extends Component {
   }
   save(e) {
     e.preventDefault();
-    let recipeInputs = {recipeName: this.refs.recipeName.getValue(), ingredients: this.refs.ingredients.getValue().split(','), directions: this.refs.directions.getValue()};
+    let recipeInputs = {
+      recipeName: this.refs.recipeName.getValue(),
+      ingredients: this.refs.ingredients.getValue().split(','),
+      directions: this.refs.directions.getValue()
+    };
     this.props.addRecipe(recipeInputs);
     this.toggle();
   }
@@ -51,7 +55,6 @@ class ModalContainer extends Component {
 function mapStateToProps(state) {
   //Whatever is returned will show up as props
   //inside ModalContainer
-  console.log('state = ', state);
   return {
     showModal: state.showModal
   };
@@ -62,7 +65,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever ModalContainer is called, the result should be passed
   // to all our reducers
-  return bindActionCreators({ triggerModal: triggerModal, addRecipe: addRecipe }, dispatch);
+  return bindActionCreators({ triggerModal, addRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer);
