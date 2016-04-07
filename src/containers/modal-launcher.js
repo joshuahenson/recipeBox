@@ -10,11 +10,13 @@ class ModalLauncher extends Component {
   render() {
     return (
       <div className='row'>
-        <Button bsSize='large' bsStyle='primary' onClick={ () => this.props.triggerModal() }>
-          Add Recipe
-        </Button>
-        <ModalContainer />
-        <ModalUpdateContainer />
+        <div className='col-sm-6 col-sm-offset-3'>
+          <Button bsSize='large' bsStyle='primary' block onClick={ () => this.props.triggerModal() }>
+            Add Recipe
+          </Button>
+          <ModalContainer />
+          <ModalUpdateContainer />
+        </div>
       </div>
     )
   }

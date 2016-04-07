@@ -20,12 +20,12 @@ class EditDeleteContainer extends Component {
   render() {
     if (this.props.showAlert) {
       return (
-        <Alert bsStyle="danger" onDismiss={this.toggle}>
+        <Alert bsStyle='danger' onDismiss={this.toggle}>
             <h4>Please confirm</h4>
             <p>Are you sure you want to delete this recipe?</p>
             <hr/>
             <ButtonToolbar>
-              <Button bsStyle="danger" onClick={this.delete}>Delete Recipe</Button>
+              <Button bsStyle='primary' onClick={this.delete}>Delete Recipe</Button>
               <Button onClick={this.toggle}>Cancel</Button>
             </ButtonToolbar>
         </Alert>

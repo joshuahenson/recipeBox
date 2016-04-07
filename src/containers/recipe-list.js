@@ -11,7 +11,7 @@ class RecipeList extends Component {
       return (
         <Panel header={recipe.recipeName} key={recipe.id} eventKey={recipe.id} onClick={ () => this.props.activeRecipe(recipe) }>
           <div className="row">
-            <div className="col-xs-12">
+            <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
               <h4 className="text-center">
                 Ingredients
               </h4>
@@ -23,7 +23,7 @@ class RecipeList extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-xs-12">
+            <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
               <h4 className="text-center">
                 Directions
               </h4>
