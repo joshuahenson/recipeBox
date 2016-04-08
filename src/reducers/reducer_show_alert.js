@@ -5,6 +5,6 @@ export default function(state = false, action) {
     case 'SHOW_ALERT':
       return !state;
     default:
-      return state
+      return state;
   }
 }

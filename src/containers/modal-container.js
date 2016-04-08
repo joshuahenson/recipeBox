@@ -31,7 +31,6 @@ class ModalContainer extends Component {
       this.props.addRecipe(recipeInputs);
       this.toggle();
     }
-
   }
   render() {
     return (
@@ -58,7 +57,7 @@ class ModalContainer extends Component {
           </Modal.Footer>
         </Modal>
       </div>
-    )
+    );
   }
 }
 

@@ -25,22 +25,26 @@ class EditDeleteContainer extends Component {
             <p>Are you sure you want to delete this recipe?</p>
             <hr/>
             <ButtonToolbar>
-              <Button bsStyle='primary' onClick={this.delete}>Delete Recipe</Button>
+              <Button bsStyle='primary' onClick={this.delete}>
+                Delete Recipe
+              </Button>
               <Button onClick={this.toggle}>Cancel</Button>
             </ButtonToolbar>
         </Alert>
-      )
+      );
     } else {
       return (
         <ButtonToolbar>
-          <Button bsSize='small' bsStyle='primary' onClick={ () => this.props.triggerUpdateModal() }>
+          <Button bsSize='small' bsStyle='primary'
+            onClick={ () => this.props.triggerUpdateModal() }>
             Edit
           </Button>
-          <Button bsSize='small' bsStyle='danger' onClick={ () => this.props.triggerAlert() }>
+          <Button bsSize='small' bsStyle='danger'
+            onClick={ () => this.props.triggerAlert() }>
             Delete
         </Button>
         </ButtonToolbar>
-      )
+      );
     }
   }
 }
@@ -52,9 +56,9 @@ function mapStateToProps(state) {
   };
 }
 
-
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerAlert, triggerUpdateModal, deleteRecipe }, dispatch);
+  return bindActionCreators({ triggerAlert, triggerUpdateModal, deleteRecipe },
+    dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditDeleteContainer);
