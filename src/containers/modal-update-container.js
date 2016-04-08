@@ -9,20 +9,28 @@ class ModalUpdateContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.update = this.update.bind(this);
+    this.state = {name: null};
   }
   toggle() {
     this.props.triggerUpdateModal();
+    this.setState({ name: null })
   }
   update(e) {
     e.preventDefault();
-    let recipeInputs = {
-      recipeName: this.refs.recipeName.getValue(),
-      ingredients: this.refs.ingredients.getValue().split(','),
-      directions: this.refs.directions.getValue(),
-      id: this.props.activeRecipe.id
-    };
-    this.props.updateRecipe(recipeInputs);
-    this.toggle();
+    let recipeName = this.refs.recipeName.getValue(),
+      ingredients = this.refs.ingredients.getValue(),
+      directions = this.refs.directions.getValue(),
+      recipeInputs = {
+        recipeName: recipeName,
+        ingredients: ingredients.split(','),
+        directions: directions
+      };
+    if(recipeName.length < 1) {
+      this.setState({ name: 'error' })
+    } else {
+      this.props.updateRecipe(recipeInputs);
+      this.toggle();
+    }
   }
   render() {
     return (
@@ -35,6 +43,7 @@ class ModalUpdateContainer extends Component {
             <form onSubmit={this.update}>
               <Input type="text" label="Recipe Name" ref='recipeName'
                 defaultValue={ this.props.activeRecipe.recipeName }
+                bsStyle={this.state.name}
               />
               <Input type="textarea" label="Ingredients" ref='ingredients'
                 defaultValue={ this.props.activeRecipe.ingredients }
