@@ -10,11 +10,11 @@ class ModalContainer extends Component {
     this.toggle = this.toggle.bind(this);
     this.save = this.save.bind(this);
     this.addOrUpdateRecipe = this.addOrUpdateRecipe.bind(this);
-    this.state = {name: null};
+    this.state = {name: null, required: ''};
   }
   toggle() {
     this.props.triggerModal();
-    this.setState({ name: null });
+    this.setState({ name: null, required: '' });
     if(this.props.updateModal) {
       this.props.triggerUpdateModal();
     }
@@ -34,7 +34,7 @@ class ModalContainer extends Component {
         id: this.props.activeRecipe.id
       };
     if(recipeName.length < 1) {
-      this.setState({ name: 'error' });
+      this.setState({ name: 'error', required: '  **REQUIRED**' });
     } else {
       this.addOrUpdateRecipe(recipeInputs);
       this.toggle();
@@ -51,9 +51,9 @@ class ModalContainer extends Component {
             </Modal.Header>
             <Modal.Body>
               <form onSubmit={this.save}>
-                <Input type="text" label="Recipe Name" ref='recipeName'
+                <Input type="text" label={"Recipe Name"+ this.state.required} 
+                  ref='recipeName' bsStyle={this.state.name}
                   defaultValue={ this.props.activeRecipe.recipeName }
-                  bsStyle={this.state.name}
                 />
                 <Input type="textarea" label="Ingredients" ref='ingredients'
                   defaultValue={ this.props.activeRecipe.ingredients }
@@ -73,12 +73,16 @@ class ModalContainer extends Component {
             </Modal.Header>
             <Modal.Body>
               <form onSubmit={this.save}>
-                <Input type="text" label="Recipe Name" ref='recipeName'
-                  placeholder="What are we making?" bsStyle={this.state.name}/>
+                <Input type="text" label={"Recipe Name"+ this.state.required} 
+                  ref='recipeName'
+                  placeholder="What are we making?" bsStyle={this.state.name}
+                />
                 <Input type="textarea" label="Ingredients" ref='ingredients'
-                  placeholder="list, separated, by, comma" />
+                  placeholder="list, separated, by, comma" 
+                />
                 <Input type="textarea" label="Directions" ref='directions'
-                  placeholder="What are we going to do with these ingredients?" />
+                  placeholder="What are we going to do with these ingredients?" 
+                />
               </form>
             </Modal.Body>
           </div>
