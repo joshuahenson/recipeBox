@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteRecipe, triggerAlert, triggerUpdateModal, triggerModal } from '../actions/index';
+import { deleteRecipe, triggerUpdateModal, triggerModal } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Alert, Button, ButtonToolbar } from 'react-bootstrap';
 
@@ -8,10 +8,11 @@ class EditDeleteContainer extends Component {
   constructor(props) {
     super(props);
     this.delete = this.delete.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.state = {alertVisible: false};
+    this.toggleAlert = this.toggleAlert.bind(this);
   }
-  toggle() {
-    this.props.triggerAlert();
+  toggleAlert() {
+    this.setState({alertVisible: !this.state.alertVisible});
   }
   toggleModal() {
     this.props.triggerModal();
@@ -19,12 +20,12 @@ class EditDeleteContainer extends Component {
   }
   delete() {
     this.props.deleteRecipe(this.props.activeRecipe.id);
-    this.toggle();
+    this.toggleAlert();
   }
   render() {
-    if (this.props.showAlert) {
+    if (this.state.alertVisible) {
       return (
-        <Alert bsStyle='danger' onDismiss={this.toggle}>
+        <Alert bsStyle='danger' onDismiss={ this.toggleAlert }>
             <h4>Please confirm</h4>
             <p>Are you sure you want to delete this recipe?</p>
             <hr/>
@@ -32,7 +33,7 @@ class EditDeleteContainer extends Component {
               <Button bsStyle='primary' onClick={this.delete}>
                 Delete Recipe
               </Button>
-              <Button onClick={this.toggle}>Cancel</Button>
+              <Button onClick={ this.toggleAlert }>Cancel</Button>
             </ButtonToolbar>
         </Alert>
       );
@@ -44,7 +45,7 @@ class EditDeleteContainer extends Component {
             Edit
           </Button>
           <Button bsSize='small' bsStyle='danger'
-            onClick={ () => this.props.triggerAlert() }>
+            onClick={ this.toggleAlert }>
             Delete
         </Button>
         </ButtonToolbar>
@@ -55,13 +56,12 @@ class EditDeleteContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    showAlert: state.showAlert,
     activeRecipe: state.activeRecipe
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerAlert, triggerUpdateModal, deleteRecipe, triggerModal },
+  return bindActionCreators({ triggerUpdateModal, deleteRecipe, triggerModal },
     dispatch);
 }
 

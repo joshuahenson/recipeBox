@@ -51,7 +51,6 @@ class RecipeList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state= ', state);
   return {
     recipes: state.recipes
   };
