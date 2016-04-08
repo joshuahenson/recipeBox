@@ -7,6 +7,10 @@ export default function(state = {showModal: false, updateModal: false}, action) 
       return Object.assign({}, state, {
         showModal: !state.showModal
       });
+    case 'SHOW_UPDATE_MODAL':
+      return Object.assign({}, state, {
+        updateModal: !state.updateModal
+      });      
     default:
       return state;
   }

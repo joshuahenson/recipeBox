@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteRecipe, triggerAlert, triggerUpdateModal } from '../actions/index';
+import { deleteRecipe, triggerAlert, triggerUpdateModal, triggerModal } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Alert, Button, ButtonToolbar } from 'react-bootstrap';
 
@@ -12,6 +12,10 @@ class EditDeleteContainer extends Component {
   }
   toggle() {
     this.props.triggerAlert();
+  }
+  toggleModal() {
+    this.props.triggerModal();
+    this.props.triggerUpdateModal();
   }
   delete() {
     this.props.deleteRecipe(this.props.activeRecipe.id);
@@ -36,7 +40,7 @@ class EditDeleteContainer extends Component {
       return (
         <ButtonToolbar>
           <Button bsSize='small' bsStyle='primary'
-            onClick={ () => this.props.triggerUpdateModal() }>
+            onClick={ () => this.toggleModal() }>
             Edit
           </Button>
           <Button bsSize='small' bsStyle='danger'
@@ -57,7 +61,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerAlert, triggerUpdateModal, deleteRecipe },
+  return bindActionCreators({ triggerAlert, triggerUpdateModal, deleteRecipe, triggerModal },
     dispatch);
 }
 

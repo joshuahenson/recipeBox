@@ -67,7 +67,7 @@ class ModalUpdateContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    showUpdateModal: state.showUpdateModal,
+    showUpdateModal: state.modal.UpdateModal,
     activeRecipe: state.activeRecipe
   };
 }

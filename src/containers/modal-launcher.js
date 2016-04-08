@@ -4,7 +4,7 @@ import { triggerModal } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
 import ModalContainer from './modal-container';
-import ModalUpdateContainer from './modal-update-container';
+// import ModalUpdateContainer from './modal-update-container';
 
 class ModalLauncher extends Component {
   render() {
@@ -16,7 +16,6 @@ class ModalLauncher extends Component {
             Add Recipe
           </Button>
           <ModalContainer />
-          <ModalUpdateContainer />
         </div>
       </div>
     );
@@ -25,6 +24,7 @@ class ModalLauncher extends Component {
 
 function mapStateToProps(state) {
   return {
+    //todo why is this still here?
     showModal: state.modal.showModal
   };
 }
