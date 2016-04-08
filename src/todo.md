@@ -1,8 +1,8 @@
-search todo to cleanup code
+Add more validation to forms?
 ***
 
 ***
 build production version
-* express server
+* express server or github?
 * webpack
 ***

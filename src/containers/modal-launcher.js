@@ -4,7 +4,6 @@ import { triggerModal } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
 import ModalContainer from './modal-container';
-// import ModalUpdateContainer from './modal-update-container';
 
 class ModalLauncher extends Component {
   render() {
@@ -22,19 +21,8 @@ class ModalLauncher extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    //todo why is this still here?
-    showModal: state.modal.showModal
-  };
-}
-
-// Anything returned from this function will end up as props
-// on the ModalLauncher container
 function mapDispatchToProps(dispatch) {
-  // Whenever ModalLauncher is called, the result should be passed
-  // to all our reducers
   return bindActionCreators({ triggerModal }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalLauncher);
+export default connect(null, mapDispatchToProps)(ModalLauncher);
