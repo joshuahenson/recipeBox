@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerModal, triggerUpdateModal, addRecipe } from '../actions/index';
+import { triggerModal, triggerUpdateModal, addRecipe, updateRecipe } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
@@ -9,7 +9,8 @@ class ModalContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.save = this.save.bind(this);
-    this.update = this.update.bind(this);
+    // this.update = this.update.bind(this);
+    this.addOrUpdateRecipe = this.addOrUpdateRecipe.bind(this);
     this.state = {name: null};
   }
   toggle() {
@@ -20,22 +21,25 @@ class ModalContainer extends Component {
     }
   }
   // todo refactor update and save functions now that modals are combined
-  update(e) {
-    e.preventDefault();
-    let recipeName = this.refs.recipeName.getValue(),
-      ingredients = this.refs.ingredients.getValue(),
-      directions = this.refs.directions.getValue(),
-      recipeInputs = {
-        recipeName: recipeName,
-        ingredients: ingredients.split(','),
-        directions: directions
-      };
-    if(recipeName.length < 1) {
-      this.setState({ name: 'error' })
-    } else {
-      this.props.updateRecipe(recipeInputs);
-      this.toggle();
-    }
+  // update(e) {
+  //   e.preventDefault();
+  //   let recipeName = this.refs.recipeName.getValue(),
+  //     ingredients = this.refs.ingredients.getValue(),
+  //     directions = this.refs.directions.getValue(),
+  //     recipeInputs = {
+  //       recipeName: recipeName,
+  //       ingredients: ingredients.split(','),
+  //       directions: directions
+  //     };
+  //   if(recipeName.length < 1) {
+  //     this.setState({ name: 'error' })
+  //   } else {
+  //     this.props.updateRecipe(recipeInputs);
+  //     this.toggle();
+  //   }
+  // }
+  addOrUpdateRecipe(recipeInputs) {
+    { this.props.updateModal ? this.props.updateRecipe(recipeInputs) : this.props.addRecipe(recipeInputs) }
   }
   save(e) {
     e.preventDefault();
@@ -50,20 +54,24 @@ class ModalContainer extends Component {
     if(recipeName.length < 1) {
       this.setState({ name: 'error' })
     } else {
-      this.props.addRecipe(recipeInputs);
+      this.addOrUpdateRecipe(recipeInputs);
       this.toggle();
     }
   }
   render() {
     return (
       <div className='row'>
+        <Modal show={this.props.showModal} onHide={this.toggle}>
+          
+          
+          
       { this.props.updateModal ?
-      <Modal show={this.props.showModal} onHide={this.toggle}>
+        <div>
         <Modal.Header closeButton>
           <Modal.Title>{ this.props.activeRecipe.recipeName }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={this.update}>
+          <form onSubmit={this.save}>
             <Input type="text" label="Recipe Name" ref='recipeName'
               defaultValue={ this.props.activeRecipe.recipeName }
               bsStyle={this.state.name}
@@ -76,18 +84,12 @@ class ModalContainer extends Component {
             />
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.toggle}>Cancel</Button>
-          <Button bsStyle='primary' type='submit' onClick={this.update}>
-            Update Recipe
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      </div>
       : 
-      <Modal show={this.props.showModal} onHide={this.toggle}>
+        <div>
           <Modal.Header closeButton>
             <Modal.Title>
-              { this.props.updateModal ? this.props.activeRecipe.recipeName : 'Recipe' }
+              Recipe
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -100,16 +102,16 @@ class ModalContainer extends Component {
                 placeholder="What are we going to do with these ingredients?" />
             </form>
           </Modal.Body>
+        </div>
+        
+      } 
           <Modal.Footer>
             <Button onClick={this.toggle}>Cancel</Button>
             <Button bsStyle='primary' type='submit' onClick={this.save}>
               Save Recipe
             </Button>
           </Modal.Footer>
-        </Modal>
-        
-      } 
-        
+        </Modal>        
       </div>
     );
   }
@@ -131,7 +133,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever ModalContainer is called, the result should be passed
   // to all our reducers
-  return bindActionCreators({ triggerModal, triggerUpdateModal, addRecipe }, dispatch);
+  return bindActionCreators({ triggerModal, triggerUpdateModal, addRecipe, updateRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer);
