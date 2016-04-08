@@ -10,8 +10,11 @@ const recipe = (state, action) => {
 
     case 'UPDATE_RECIPE':
       if (state.id !== action.payload.id) {
+        console.log('ignored recipe state: ', state)
+        console.log('action.payload.id: ', action.payload.id)
         return state;
       }
+      console.log('updated recipe state: ', state)
       return Object.assign({}, state, {
         recipeName: action.payload.recipeName,
         ingredients: action.payload.ingredients,
@@ -40,6 +43,7 @@ const recipes = (state = [exampleState], action) => {
       return state.filter(recipe => recipe.id !== action.id);
 
     case 'UPDATE_RECIPE':
+      console.log('---------update recipes state: ', state)
       return state.map(t =>
         recipe(t, action)
       );

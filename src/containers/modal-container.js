@@ -49,7 +49,8 @@ class ModalContainer extends Component {
       recipeInputs = {
         recipeName: recipeName,
         ingredients: ingredients.split(','),
-        directions: directions
+        directions: directions,
+        id: this.props.activeRecipe.id
       };
     if(recipeName.length < 1) {
       this.setState({ name: 'error' })
