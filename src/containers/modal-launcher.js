@@ -25,7 +25,7 @@ class ModalLauncher extends Component {
 
 function mapStateToProps(state) {
   return {
-    showModal: state.showModal
+    showModal: state.modal.showModal
   };
 }
 

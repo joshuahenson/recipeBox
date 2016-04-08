@@ -64,8 +64,9 @@ class ModalContainer extends Component {
 function mapStateToProps(state) {
   //Whatever is returned will show up as props
   //inside ModalContainer
+  console.log('state= ', state);
   return {
-    showModal: state.showModal
+    showModal: state.modal.showModal
   };
 }
 
