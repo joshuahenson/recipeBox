@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Panel } from 'react-bootstrap';
-import { triggerUpdateModal, activeRecipe } from '../actions/index';
+import { activeRecipe } from '../actions/index';
 import EditDeleteContainer from './edit-delete';
 import { bindActionCreators } from 'redux';
 
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ triggerUpdateModal, activeRecipe }, dispatch);
+  return bindActionCreators({ activeRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeList);
