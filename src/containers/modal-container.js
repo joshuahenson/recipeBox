@@ -9,19 +9,29 @@ class ModalContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.save = this.save.bind(this);
+    this.state = {name: null};
   }
   toggle() {
     this.props.triggerModal();
+    this.setState({ name: null })
   }
   save(e) {
     e.preventDefault();
-    let recipeInputs = {
-      recipeName: this.refs.recipeName.getValue(),
-      ingredients: this.refs.ingredients.getValue().split(','),
-      directions: this.refs.directions.getValue()
-    };
-    this.props.addRecipe(recipeInputs);
-    this.toggle();
+    let recipeName = this.refs.recipeName.getValue(),
+      ingredients = this.refs.ingredients.getValue(),
+      directions = this.refs.directions.getValue(),
+      recipeInputs = {
+        recipeName: recipeName,
+        ingredients: ingredients.split(','),
+        directions: directions
+      };
+    if(recipeName.length < 1) {
+      this.setState({ name: 'error' })
+    } else {
+      this.props.addRecipe(recipeInputs);
+      this.toggle();
+    }
+
   }
   render() {
     return (
@@ -33,7 +43,7 @@ class ModalContainer extends Component {
           <Modal.Body>
             <form onSubmit={this.save}>
               <Input type="text" label="Recipe Name" ref='recipeName'
-                placeholder="What are we making?" />
+                placeholder="What are we making?" bsStyle={this.state.name}/>
               <Input type="textarea" label="Ingredients" ref='ingredients'
                 placeholder="list, separated, by, comma" />
               <Input type="textarea" label="Directions" ref='directions'
