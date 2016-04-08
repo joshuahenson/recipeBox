@@ -3,6 +3,6 @@ export default function(state = {}, action) {
     case 'ACTIVE_RECIPE':
       return action.payload;
     default:
-      return state
+      return state;
   }
 }

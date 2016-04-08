@@ -22,7 +22,7 @@ class RecipeList extends Component {
               </h4>
               <ul>
                 {recipe.ingredients.map(ingredient => {
-                  return(<li key={ingredient}>{ingredient}</li>)
+                  return(<li key={ingredient}>{ingredient}</li>);
                 })}
               </ul>
             </div>
@@ -51,7 +51,6 @@ class RecipeList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state= ', state);
   return {
     recipes: state.recipes
   };

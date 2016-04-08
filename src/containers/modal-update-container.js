@@ -61,7 +61,7 @@ class ModalUpdateContainer extends Component {
           </Modal.Footer>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
