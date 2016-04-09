@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerModal, addRecipe } from '../actions/index';
+import { triggerModal, triggerUpdateModal, addRecipe, updateRecipe } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import { Modal, Button, Input } from 'react-bootstrap';
 
@@ -9,11 +9,18 @@ class ModalContainer extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.save = this.save.bind(this);
-    this.state = {name: null};
+    this.addOrUpdateRecipe = this.addOrUpdateRecipe.bind(this);
+    this.state = {name: null, required: ''};
   }
   toggle() {
     this.props.triggerModal();
-    this.setState({ name: null })
+    this.setState({ name: null, required: '' });
+    if(this.props.updateModal) {
+      this.props.triggerUpdateModal();
+    }
+  }
+  addOrUpdateRecipe(recipeInputs) {
+    { this.props.updateModal ? this.props.updateRecipe(recipeInputs) : this.props.addRecipe(recipeInputs) }
   }
   save(e) {
     e.preventDefault();
@@ -23,39 +30,70 @@ class ModalContainer extends Component {
       recipeInputs = {
         recipeName: recipeName,
         ingredients: ingredients.split(','),
-        directions: directions
+        directions: directions,
+        id: this.props.activeRecipe.id
       };
     if(recipeName.length < 1) {
-      this.setState({ name: 'error' })
+      this.setState({ name: 'error', required: '  **REQUIRED**' });
     } else {
-      this.props.addRecipe(recipeInputs);
+      this.addOrUpdateRecipe(recipeInputs);
       this.toggle();
     }
   }
   render() {
     return (
       <div className='row'>
-        <Modal show={this.props.showModal} onHide={this.toggle}>
-          <Modal.Header closeButton>
-            <Modal.Title>Recipe</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form onSubmit={this.save}>
-              <Input type="text" label="Recipe Name" ref='recipeName'
-                placeholder="What are we making?" bsStyle={this.state.name}/>
-              <Input type="textarea" label="Ingredients" ref='ingredients'
-                placeholder="list, separated, by, comma" />
-              <Input type="textarea" label="Directions" ref='directions'
-                placeholder="What are we going to do with these ingredients?" />
-            </form>
-          </Modal.Body>
+        <Modal show={this.props.showModal} onHide={this.toggle}>       
+        { this.props.updateModal ?
+          <div>
+            <Modal.Header closeButton>
+              <Modal.Title>{ this.props.activeRecipe.recipeName }</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <form onSubmit={this.save}>
+                <Input type="text" label={"Recipe Name"+ this.state.required} 
+                  ref='recipeName' bsStyle={this.state.name}
+                  defaultValue={ this.props.activeRecipe.recipeName }
+                />
+                <Input type="textarea" label="Ingredients" ref='ingredients'
+                  defaultValue={ this.props.activeRecipe.ingredients }
+                />
+                <Input type="textarea" label="Directions" ref='directions'
+                  defaultValue={ this.props.activeRecipe.directions }
+                />
+              </form>
+            </Modal.Body>
+          </div>
+        : 
+          <div>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                Recipe
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <form onSubmit={this.save}>
+                <Input type="text" label={"Recipe Name"+ this.state.required} 
+                  ref='recipeName'
+                  placeholder="What are we making?" bsStyle={this.state.name}
+                />
+                <Input type="textarea" label="Ingredients" ref='ingredients'
+                  placeholder="list, separated, by, comma" 
+                />
+                <Input type="textarea" label="Directions" ref='directions'
+                  placeholder="What are we going to do with these ingredients?" 
+                />
+              </form>
+            </Modal.Body>
+          </div>
+        } 
           <Modal.Footer>
             <Button onClick={this.toggle}>Cancel</Button>
             <Button bsStyle='primary' type='submit' onClick={this.save}>
               Save Recipe
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal>        
       </div>
     );
   }
@@ -65,7 +103,9 @@ function mapStateToProps(state) {
   //Whatever is returned will show up as props
   //inside ModalContainer
   return {
-    showModal: state.showModal
+    showModal: state.modal.showModal,
+    updateModal: state.modal.updateModal,
+    activeRecipe: state.activeRecipe
   };
 }
 
@@ -74,7 +114,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever ModalContainer is called, the result should be passed
   // to all our reducers
-  return bindActionCreators({ triggerModal, addRecipe }, dispatch);
+  return bindActionCreators({ triggerModal, triggerUpdateModal, addRecipe, updateRecipe }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalContainer);

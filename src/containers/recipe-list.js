@@ -46,7 +46,7 @@ class RecipeList extends Component {
       <Accordion>
         {this.renderList()}
       </Accordion>
-    )
+    );
   }
 }
 
